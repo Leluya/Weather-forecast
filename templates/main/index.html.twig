@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    O'weather
+{% endblock %}
+
+{% block body %}
+
+    <!-- Minimal responsive + columns -->
+    <main class="container">
+        <div class="row">
+            <!-- Content (les pages) -->
+            <div class="col-9">
+
+                <h1 class="mb-5">Bienvenue sur la météo des villes !</h1>
+
+                {% for key, weather in weathers %}
+                    <div class="item item--bg-{{ weather.weather }}">
+                        <div class="item--city"><a href="{{ path('main_city_switcher',{'id' : key}) }}">{{ weather.city }}</a></div>
+                        <div class="item--forecast">{{ weather.date }} : {{ weather.min }}°C / {{ weather.max }}°C</div>
+                    </div>
+                {% endfor %}
+                
+{% endblock %}

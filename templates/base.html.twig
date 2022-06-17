@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+
+    <!-- Balises pour le responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!-- Notre CSS custom -->
+    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+</head>
+
+<body class="mb-5">
+    <nav class="container py-3 mb-3">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link active" href="{{ path('main_home') }}">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{{ path('main_mountain') }}">Montagne</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{{ path('main_beach') }}">Plages</a>
+            </li>
+        </ul>
+    </nav>
+        {% block body %}{% endblock %}
+         </div>
+                  <!-- Sidebar (le widget) -->
+            <div class="col-3">
+
+                <!-- Code du widget -->
+                <div id="widget">
+                    {# {{dump(app.session.get('city'))}} #}
+                    <!-- Si ville sélectionnée -->
+                    {% if app.session.has('city') %}
+                    <p><b>{{ app.session.get('city').city}}</b></p>
+                    <p>{{ app.session.get('city').date }}</p>
+                    <p><img src="{{ asset('assets/images/' ~ app.session.get('city').weather ~ '.png') }}"></p>
+
+                    <p>{{ app.session.get('city').min }}°C / {{ app.session.get('city').max }}°C</p>
+                    {% else %}
+                    <!-- Si ville non sélectionnée -->
+                    <div>Sélectionnez une ville<br>dans la liste de gauche de l'<a href="{{ path('main_home') }}">Accueil</a>  </div>
+                    {% endif %}
+                </div>
+
+            </div>
+   
+        </div>
+    </main>
+</body>
+
+</html>
